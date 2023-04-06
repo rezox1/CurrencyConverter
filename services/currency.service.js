@@ -62,12 +62,18 @@ async function getActualExchangeRates({centralBankCode}) {
         allExchangeRates = bankExchangeRatesData.exchangeRates,
         baseCurrency = bankExchangeRatesData.baseCurrency;
 
-    for (let currenciesNames in allExchangeRates) {
-        if (currenciesNames.startsWith(baseCurrency)) {
-            let targetCurrency = currenciesNames.replace(baseCurrency + ":", "");
+    let exchangeCombinations = Object.keys(allExchangeRates);
+
+    exchangeCombinations.sort((firstExchangeCombination, secondExchangeCombination) => {
+        return firstExchangeCombination.localeCompare(secondExchangeCombination);
+    });
+
+    for (let exchangeCombination of exchangeCombinations) {
+        if (exchangeCombination.startsWith(baseCurrency + ":")) {
+            let targetCurrency = exchangeCombination.replace(baseCurrency + ":", "");
             targetCurrency = targetCurrency.toUpperCase();
 
-            actualExchangeRates[targetCurrency] = allExchangeRates[currenciesNames];
+            actualExchangeRates[targetCurrency] = allExchangeRates[exchangeCombination];
         }
     }
 
