@@ -22,7 +22,7 @@ const refreshExchengeRates = schedule.scheduleJob("*/5 * * * *", async () => {
 
         actualExchangeRatesDataReceived = newExchangeRates;
     } catch (err) {
-        logger.error(err);
+        console.error(err);
     }
 });
 
