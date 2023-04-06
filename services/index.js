@@ -1,4 +1,4 @@
-const currencyService = require("./currency.service.js");
+const currencyService = require('./currency.service.js');
 
 module.exports = {
     currencyService

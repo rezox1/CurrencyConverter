@@ -1,4 +1,4 @@
-const dayjs = require("dayjs");
+const dayjs = require('dayjs');
 
 const CENTRAL_BANK_CODE = "thai";
 
