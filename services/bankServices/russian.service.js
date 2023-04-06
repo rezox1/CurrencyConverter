@@ -16,7 +16,7 @@ const BASE_CURRENCY_CODE = "rub";
 
 let actualExchangeRatesDataReceived = getActualExchangeRatesData();
 
-const refreshExchengeRates = schedule.scheduleJob("*/5 * * * *", async () => {
+const refreshExchangeRates = schedule.scheduleJob("*/5 * * * *", async () => {
     try {
         let newExchangeRates = await getActualExchangeRatesData();
 
