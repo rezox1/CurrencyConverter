@@ -4,7 +4,7 @@ async function getExchangeRates(req, res) {
 	try {
 		let centralBankCode = req.query.centralBankCode;
 		if (centralBankCode) {
-			let centralBankCodeIsSupported = await currencyService.isCentralBankCodeSupported(centralBankCode);
+			let centralBankCodeIsSupported = currencyService.isCentralBankCodeSupported(centralBankCode);
 			if (centralBankCodeIsSupported) {
 				// ok, move on
 			} else {
@@ -74,7 +74,7 @@ async function getConversion(req, res) {
 
 		let centralBankCode = req.query.centralBankCode;
 		if (centralBankCode) {
-			let centralBankCodeIsSupported = await currencyService.isCentralBankCodeSupported(centralBankCode);
+			let centralBankCodeIsSupported = currencyService.isCentralBankCodeSupported(centralBankCode);
 			if (centralBankCodeIsSupported) {
 				// ok, move on
 			} else {
