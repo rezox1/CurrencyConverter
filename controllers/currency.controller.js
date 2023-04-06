@@ -90,15 +90,16 @@ async function getConversion(req, res) {
         });
 
         let conversionValue = conversionResult.value,
-            actualFor = conversionResult.actualFor;
+            conversionActualFor = conversionResult.actualFor,
+            conversionCentralBankCode = conversionResult.centralBankCode;
 
         let actualForString = actualFor.format("DD.MM.YYYY");
 
         res.send({
             "success": true,
             "value": conversionValue,
-            "centralBankCode": centralBankCode,
-            "actualFor": actualForString
+            "centralBankCode": conversionCentralBankCode,
+            "actualFor": conversionActualFor
         });
     } catch (err) {
         console.error(err);
