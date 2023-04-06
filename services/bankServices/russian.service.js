@@ -52,11 +52,11 @@ async function getActualExchangeRatesData() {
         let rublesToPayString = rawExchangeRateData.Value[0],
             currencyToGetString = rawExchangeRateData.Nominal[0];
 
-        rublesToPayString = rublesToPayString.replace(",", ".");
-        currencyToGetString = currencyToGetString.replace(",", ".");
+        let preparedRublesToPayString = rublesToPayString.replace(",", "."),
+            preparedCurrencyToGetString = currencyToGetString.replace(",", ".");
 
-        let rublesToPay = Number(rublesToPayString),
-            currencyToGet = Number(currencyToGetString);
+        let rublesToPay = Number(preparedRublesToPayString),
+            currencyToGet = Number(preparedCurrencyToGetString);
 
         let exchangeCombination = currencyCode + ":" + BASE_CURRENCY_CODE;
 
