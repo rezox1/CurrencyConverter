@@ -5,9 +5,8 @@ const {
     russianBankService
 } = require("./bankServices");
 
-const THAI_CENTRAL_BANK_CODE = thaiBankService.getCode();
-
-const RUSSIAN_CENTRAL_BANK_CODE = russianBankService.getCode();
+const THAI_CENTRAL_BANK_CODE = thaiBankService.getCode(),
+    RUSSIAN_CENTRAL_BANK_CODE = russianBankService.getCode();
 
 const DEFAULT_CENTRAL_BANK_CODE = THAI_CENTRAL_BANK_CODE;
 
