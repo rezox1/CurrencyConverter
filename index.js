@@ -16,7 +16,7 @@ app.use(express.urlencoded({
 }));
 
 app.get('/', (req, res) => {
-	res.send('App is working');
+    res.send('App is working');
 });
 
 app.use('/api', routes);
