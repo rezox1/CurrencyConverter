@@ -67,13 +67,13 @@ async function getActualExchangeRatesData() {
 
         let exchangeCombination = currencyCode + ":" + BASE_CURRENCY_CODE;
 
-        let exchangeRatio = currencyToGet / rublesToPay;
+        let exchangeRatio = parseFloat((rublesToPay / currencyToGet).toFixed(calculationAccuracy));
 
         exchangeRates[exchangeCombination] = exchangeRatio;
 
         let anotherExchangeCombination = BASE_CURRENCY_CODE + ":" + currencyCode;
 
-        let anotherExchangeRatio = parseFloat((rublesToPay / currencyToGet).toFixed(calculationAccuracy));
+        let anotherExchangeRatio = currencyToGet / rublesToPay;
 
         exchangeRates[anotherExchangeCombination] = anotherExchangeRatio;
     }
@@ -82,7 +82,7 @@ async function getActualExchangeRatesData() {
         "actualFor": actualFor,
         "exchangeRates": exchangeRates,
         "baseCurrency": BASE_CURRENCY_CODE
-    }
+    };
 }
 
 async function getExchangeRatesData() {

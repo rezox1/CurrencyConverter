@@ -69,8 +69,8 @@ async function getActualExchangeRates({centralBankCode}) {
     });
 
     for (let exchangeCombination of exchangeCombinations) {
-        if (exchangeCombination.startsWith(baseCurrency + ":")) {
-            let targetCurrency = exchangeCombination.replace(baseCurrency + ":", "");
+        if (exchangeCombination.endsWith(":" + baseCurrency)) {
+            let targetCurrency = exchangeCombination.replace(":" + baseCurrency, "");
             targetCurrency = targetCurrency.toUpperCase();
 
             actualExchangeRates[targetCurrency] = allExchangeRates[exchangeCombination];
@@ -176,6 +176,8 @@ async function convertCurrencies({fromCurrency, toCurrency, amount, centralBankC
             let exchangeRatio = exchangeToProcess.exchangeRatio;
 
             conversionResult = amount * exchangeRatio;
+
+            conversionResult = parseFloat(conversionResult.toFixed(2));
 
             actualFor = exchangeToProcess.actualFor;
 
