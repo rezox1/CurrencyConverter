@@ -25,6 +25,8 @@ function isCentralBankCodeSupported(centralBankCode) {
         throw new Error("centralBankCode is not defined");
     }
 
+    centralBankCode = centralBankCode.toLowerCase();
+
     if (SUPPORTED_CENTRAL_BANK_CODES.includes(centralBankCode)) {
         return true;
     } else {
@@ -36,6 +38,8 @@ async function getActualExchangeRates({centralBankCode}) {
     if (!centralBankCode) {
         throw new Error("centralBankCode is not defined");
     }
+
+    centralBankCode = centralBankCode.toLowerCase();
 
     // ...
 
@@ -62,11 +66,16 @@ async function convertCurrencies({fromCurrency, toCurrency, amount, centralBankC
         // ...
     }
 
+    if (centralBankCode) {
+        centralBankCode = centralBankCode.toLowerCase();
+    }
+
     let currentDate = dayjs();
 
     return {
         "value": amount,
-        "actualFor": currentDate
+        "actualFor": currentDate,
+        "centralBankCode": centralBankCode
     };
 }
 
