@@ -1,8 +1,8 @@
 const dayjs = require("dayjs");
 
 const {
-	thaiBankService,
-	russianBankService
+    thaiBankService,
+    russianBankService
 } = require("./bankServices");
 
 const THAI_CENTRAL_BANK_CODE = "thai";
@@ -12,71 +12,71 @@ const RUSSIAN_CENTRAL_BANK_CODE = "russian";
 const DEFAULT_CENTRAL_BANK_CODE = THAI_CENTRAL_BANK_CODE;
 
 const SUPPORTED_CENTRAL_BANK_CODES = [
-	THAI_CENTRAL_BANK_CODE,
-	RUSSIAN_CENTRAL_BANK_CODE
+    THAI_CENTRAL_BANK_CODE,
+    RUSSIAN_CENTRAL_BANK_CODE
 ];
 
 function getDefaultCentralBankCode() {
-	return DEFAULT_CENTRAL_BANK_CODE;
+    return DEFAULT_CENTRAL_BANK_CODE;
 }
 
 function isCentralBankCodeSupported(centralBankCode) {
-	if (!centralBankCode) {
-		throw new Error("centralBankCode is not defined");
-	}
+    if (!centralBankCode) {
+        throw new Error("centralBankCode is not defined");
+    }
 
-	if (SUPPORTED_CENTRAL_BANK_CODES.includes(centralBankCode)) {
-		return true;
-	} else {
-		return false;
-	}
+    if (SUPPORTED_CENTRAL_BANK_CODES.includes(centralBankCode)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 async function getActualExchangeRates({centralBankCode}) {
-	if (!centralBankCode) {
-		throw new Error("centralBankCode is not defined");
-	}
+    if (!centralBankCode) {
+        throw new Error("centralBankCode is not defined");
+    }
 
-	// ...
+    // ...
 
-	let currentDate = dayjs();
+    let currentDate = dayjs();
 
-	return {
-		"actualExchangeRates": {},
-		"actualFor": currentDate
-	};
+    return {
+        "actualExchangeRates": {},
+        "actualFor": currentDate
+    };
 }
 
 async function isCurrencySupported(currencyCode) {
-	if (!currencyCode) {
-		throw new Error("currencyCode is not defined");
-	}
+    if (!currencyCode) {
+        throw new Error("currencyCode is not defined");
+    }
 
-	// ...
+    // ...
 
-	return true;
+    return true;
 }
 
 async function convertCurrencies({fromCurrency, toCurrency, amount, centralBankCode}) {
-	if (!fromCurrency) {
-		// ...
-	}
+    if (!fromCurrency) {
+        // ...
+    }
 
-	let currentDate = dayjs();
+    let currentDate = dayjs();
 
-	return {
-		"value": amount,
-		"actualFor": currentDate
-	};
+    return {
+        "value": amount,
+        "actualFor": currentDate
+    };
 }
 
 module.exports = {
-	getDefaultCentralBankCode,
-	isCentralBankCodeSupported,
+    getDefaultCentralBankCode,
+    isCentralBankCodeSupported,
 
-	getActualExchangeRates,
+    getActualExchangeRates,
 
-	isCurrencySupported,
+    isCurrencySupported,
 
-	convertCurrencies
+    convertCurrencies
 };
