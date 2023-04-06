@@ -8,7 +8,7 @@ const schedule = require('node-schedule');
 const axios = require('axios');
 
 const xml2js = require('xml2js');
-const xmlParser = new xml2js.Parser
+const xmlParser = new xml2js.Parser;
 
 const CENTRAL_BANK_CODE = "rus";
 
@@ -95,4 +95,4 @@ module.exports = {
     getCode,
 
     getExchangeRatesData
-}
+};
