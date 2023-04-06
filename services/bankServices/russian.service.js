@@ -52,6 +52,13 @@ async function getActualExchangeRatesData() {
         let rublesToPayString = rawExchangeRateData.Value[0],
             currencyToGetString = rawExchangeRateData.Nominal[0];
 
+        let calculationAccuracy = currencyToGetString.length - 1;
+
+        let [, fractionalPartOfRublesToPayString] = rublesToPayString.split(",");
+        if (fractionalPartOfRublesToPayString) {
+            calculationAccuracy += fractionalPartOfRublesToPayString.length;
+        }
+
         let preparedRublesToPayString = rublesToPayString.replace(",", "."),
             preparedCurrencyToGetString = currencyToGetString.replace(",", ".");
 
@@ -60,11 +67,15 @@ async function getActualExchangeRatesData() {
 
         let exchangeCombination = currencyCode + ":" + BASE_CURRENCY_CODE;
 
-        exchangeRates[exchangeCombination] = currencyToGet / rublesToPay;
+        let exchangeRatio = currencyToGet / rublesToPay;
+
+        exchangeRates[exchangeCombination] = exchangeRatio;
 
         let anotherExchangeCombination = BASE_CURRENCY_CODE + ":" + currencyCode;
 
-        exchangeRates[anotherExchangeCombination] = rublesToPay / currencyToGet;
+        let anotherExchangeRatio = parseFloat((rublesToPay / currencyToGet).toFixed(calculationAccuracy));
+
+        exchangeRates[anotherExchangeCombination] = anotherExchangeRatio;
     }
 
     return {
