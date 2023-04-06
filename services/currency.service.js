@@ -3,7 +3,7 @@ const dayjs = require('dayjs');
 const {
     thaiBankService,
     russianBankService
-} = require("./bankServices");
+} = require('./bankServices');
 
 const THAI_CENTRAL_BANK_CODE = thaiBankService.getCode(),
     RUSSIAN_CENTRAL_BANK_CODE = russianBankService.getCode();
