@@ -19,13 +19,15 @@ async function getExchangeRates(req, res) {
         });
 
         let actualExchangeRates = exchangeRatesData.actualExchangeRates,
-            actualFor = exchangeRatesData.actualFor;
+            actualFor = exchangeRatesData.actualFor,
+            baseCurrency = exchangeRatesData.baseCurrency;
 
         let actualForString = actualFor.format("DD.MM.YYYY");
 
         res.send({
             "success": true,
-            "info": actualExchangeRates,
+            "rates": actualExchangeRates,
+            "baseCurrency": baseCurrency,
             "centralBankCode": centralBankCode,
             "actualFor": actualForString
         });
@@ -53,20 +55,6 @@ async function getConversion(req, res) {
             throw new Error("amount is empty");
         }
 
-        let fromCurrencyIsSupported = await currencyService.isCurrencySupported(fromCurrency);
-        if (fromCurrencyIsSupported) {
-            // ok, move on
-        } else {
-            throw new Error(`currency with code "${fromCurrency}" is not supported`);
-        }
-
-        let toCurrencyIsSupported = await currencyService.isCurrencySupported(toCurrency);
-        if (toCurrencyIsSupported) {
-            // ok, move on
-        } else {
-            throw new Error(`currency with code "${toCurrency}" is not supported`);
-        }
-
         let amount = Number(amountString);
         if (Number.isNaN(amount)) {
             throw new Error(`can't convert amount "${amount}"`);
@@ -82,24 +70,27 @@ async function getConversion(req, res) {
             }
         }
 
-        let conversionResult = await currencyService.convertCurrencies({
+        let conversionData = await currencyService.convertCurrencies({
             "fromCurrency": fromCurrency,
             "toCurrency": toCurrency,
             "amount": amount,
             "centralBankCode": centralBankCode
         });
 
-        let conversionValue = conversionResult.value,
-            conversionActualFor = conversionResult.actualFor,
-            conversionCentralBankCode = conversionResult.centralBankCode;
+        let conversionResult = conversionData.result,
+            conversionActualFor = conversionData.actualFor,
+            conversionCentralBankCode = conversionData.centralBankCode;
 
-        let actualForString = actualFor.format("DD.MM.YYYY");
+        let conversionActualForString = conversionActualFor.format("DD.MM.YYYY");
 
         res.send({
             "success": true,
-            "value": conversionValue,
+            "amount": amount,
+            "from": fromCurrency,
+            "to": toCurrency,
+            "result": conversionResult,
             "centralBankCode": conversionCentralBankCode,
-            "actualFor": conversionActualFor
+            "actualFor": conversionActualForString
         });
     } catch (err) {
         console.error(err);
