@@ -152,10 +152,10 @@ async function convertCurrencies({fromCurrency, toCurrency, amount, centralBankC
         }
 
         if (availableExchanges.length > 0) {
-            let exchengeToProcess;
+            let exchangeToProcess;
 
             if (availableExchanges.length === 1) {
-                exchengeToProcess = availableExchanges[0];
+                exchangeToProcess = availableExchanges[0];
             } else {
                 let exchangeForDefaultBank = availableExchanges.find((availableExchange) => {
                     let defaultBankService = bankServices[DEFAULT_CENTRAL_BANK_CODE];
@@ -167,20 +167,20 @@ async function convertCurrencies({fromCurrency, toCurrency, amount, centralBankC
                     }
                 });
                 if (exchangeForDefaultBank) {
-                    exchengeToProcess = exchangeForDefaultBank;
+                    exchangeToProcess = exchangeForDefaultBank;
                 } else {
-                    exchengeToProcess = availableExchanges[0];
+                    exchangeToProcess = availableExchanges[0];
                 }
             }
 
-            let exchangeRatio = exchengeToProcess.exchangeRatio;
+            let exchangeRatio = exchangeToProcess.exchangeRatio;
 
             conversionResult = amount * exchangeRatio;
 
-            actualFor = exchengeToProcess.actualFor;
+            actualFor = exchangeToProcess.actualFor;
 
             if (!centralBankCode) {
-                centralBankCode = exchengeToProcess.bankService.getCode();
+                centralBankCode = exchangeToProcess.bankService.getCode();
             }
         } else {
             throw new Error(`can't make convertation from "${fromCurrency}" to "${toCurrency}"`);
